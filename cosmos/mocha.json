@@ -1,0 +1,44 @@
+{
+  "rpc": "https://rpc-1.testnet.celestia.nodes.guru",
+  "rest": "https://api-1.testnet.celestia.nodes.guru",
+  "chainId": "mocha-5",
+  "chainName": "Celestia Mocha Testnet",
+  "chainSymbolImageUrl": "https://raw.githubusercontent.com/Zunia-Lab/zunia-chain-registry/main/images/mocha/chain.png",
+  "stakeCurrency": {
+    "coinDenom": "TIA",
+    "coinMinimalDenom": "utia",
+    "coinDecimals": 6
+  },
+  "bip44": {
+    "coinType": 118
+  },
+  "bech32Config": {
+    "bech32PrefixAccAddr": "celestia",
+    "bech32PrefixAccPub": "celestiapub",
+    "bech32PrefixValAddr": "celestiavaloper",
+    "bech32PrefixValPub": "celestiavaloperpub",
+    "bech32PrefixConsAddr": "celestiavalcons",
+    "bech32PrefixConsPub": "celestiavalconspub"
+  },
+  "currencies": [
+    {
+      "coinDenom": "TIA",
+      "coinMinimalDenom": "utia",
+      "coinDecimals": 6
+    }
+  ],
+  "feeCurrencies": [
+    {
+      "coinDenom": "TIA",
+      "coinMinimalDenom": "utia",
+      "coinDecimals": 6,
+      "gasPriceStep": {
+        "low": 0.01,
+        "average": 0.02,
+        "high": 0.1
+      }
+    }
+  ],
+  "features": [],
+  "isTestnet": true
+}

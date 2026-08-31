@@ -1,0 +1,79 @@
+{
+  "rpc": "https://rpc.bostrom.cybernode.ai",
+  "rest": "https://lcd.bostrom.cybernode.ai",
+  "chainId": "bostrom",
+  "chainName": "Bostrom",
+  "chainSymbolImageUrl": "https://raw.githubusercontent.com/Zunia-Lab/zunia-chain-registry/main/images/bostrom/chain.png",
+  "stakeCurrency": {
+    "coinDenom": "BOOT",
+    "coinMinimalDenom": "boot",
+    "coinDecimals": 0,
+    "coinGeckoId": "bostrom",
+    "coinImageUrl": "https://raw.githubusercontent.com/Zunia-Lab/zunia-chain-registry/main/images/bostrom/boot.png"
+  },
+  "nodeProvider": {
+    "name": "cybercongress",
+    "discord": "https://discord.gg/ARwv74ZyGH",
+    "website": "https://cyb.ai"
+  },
+  "bip44": {
+    "coinType": 118
+  },
+  "bech32Config": {
+    "bech32PrefixAccAddr": "bostrom",
+    "bech32PrefixAccPub": "bostrompub",
+    "bech32PrefixValAddr": "bostromvaloper",
+    "bech32PrefixValPub": "bostromvaloperpub",
+    "bech32PrefixConsAddr": "bostromvalcons",
+    "bech32PrefixConsPub": "bostromvalconspub"
+  },
+  "currencies": [
+    {
+      "coinDenom": "BOOT",
+      "coinMinimalDenom": "boot",
+      "coinDecimals": 0,
+      "coinGeckoId": "bostrom",
+      "coinImageUrl": "https://raw.githubusercontent.com/Zunia-Lab/zunia-chain-registry/main/images/bostrom/boot.png"
+    },
+    {
+      "coinDenom": "H",
+      "coinMinimalDenom": "hydrogen",
+      "coinDecimals": 0
+    },
+    {
+      "coinDenom": "V",
+      "coinMinimalDenom": "millivolt",
+      "coinDecimals": 3
+    },
+    {
+      "coinDenom": "A",
+      "coinMinimalDenom": "milliampere",
+      "coinDecimals": 3
+    },
+    {
+      "coinDenom": "TOCYB",
+      "coinMinimalDenom": "tocyb",
+      "coinDecimals": 0
+    }
+  ],
+  "feeCurrencies": [
+    {
+      "coinDenom": "BOOT",
+      "coinMinimalDenom": "boot",
+      "coinDecimals": 0,
+      "coinGeckoId": "bostrom",
+      "coinImageUrl": "https://raw.githubusercontent.com/Zunia-Lab/zunia-chain-registry/main/images/bostrom/boot.png",
+      "gasPriceStep": {
+        "low": 0,
+        "average": 0,
+        "high": 0.01
+      }
+    }
+  ],
+  "features": [
+    "cosmwasm"
+  ],
+  "explorers": {
+    "txPage": "https://cyb.ai/network/bostrom/tx/{txHash}"
+  }
+}

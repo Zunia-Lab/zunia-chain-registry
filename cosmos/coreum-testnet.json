@@ -1,0 +1,52 @@
+{
+  "chainId": "coreum-testnet-1",
+  "chainName": "TX Testnet",
+  "chainSymbolImageUrl": "https://raw.githubusercontent.com/Zunia-Lab/zunia-chain-registry/main/images/coreum-testnet/chain.png",
+  "rpc": "https://rpc.testnet-1.tx.org:443",
+  "rest": "https://rest.testnet-1.tx.org:443",
+  "nodeProvider": {
+    "name": "TX Foundation",
+    "website": "https://www.tx.org/",
+    "email": "ops@tx.org"
+  },
+  "bip44": {
+    "coinType": 990
+  },
+  "bech32Config": {
+    "bech32PrefixAccAddr": "testcore",
+    "bech32PrefixAccPub": "testcorepub",
+    "bech32PrefixValAddr": "testcorevaloper",
+    "bech32PrefixValPub": "testcorevaloperpub",
+    "bech32PrefixConsAddr": "testcorevalcons",
+    "bech32PrefixConsPub": "testcorevalconspub"
+  },
+  "currencies": [
+    {
+      "coinDenom": "TESTTX",
+      "coinMinimalDenom": "utestcore",
+      "coinDecimals": 6
+    }
+  ],
+  "feeCurrencies": [
+    {
+      "coinDenom": "TESTTX",
+      "coinMinimalDenom": "utestcore",
+      "coinDecimals": 6,
+      "gasPriceStep": {
+        "low": 0.0625,
+        "average": 0.0625,
+        "high": 0.0625
+      }
+    }
+  ],
+  "stakeCurrency": {
+    "coinDenom": "TESTTX",
+    "coinMinimalDenom": "utestcore",
+    "coinDecimals": 6,
+    "coinImageUrl": "https://raw.githubusercontent.com/Zunia-Lab/zunia-chain-registry/main/images/coreum-testnet/utestcore.png"
+  },
+  "features": [
+    "cosmwasm"
+  ],
+  "isTestnet": true
+}

@@ -1,0 +1,56 @@
+{
+  "chainId": "bitcanna-1",
+  "chainName": "BitCanna v1",
+  "chainSymbolImageUrl": "https://raw.githubusercontent.com/Zunia-Lab/zunia-chain-registry/main/images/bitcanna/chain.png",
+  "rpc": "https://rpc.bitcanna.network/",
+  "rest": "https://bcna.api.arcturian.tech/",
+  "nodeProvider": {
+    "name": "BitCanna Network Community",
+    "email": "dev@bitcanna.network",
+    "website": "https://www.bitcanna.network"
+  },
+  "stakeCurrency": {
+    "coinDenom": "BCNA",
+    "coinMinimalDenom": "ubcna",
+    "coinDecimals": 6,
+    "coinGeckoId": "bitcanna"
+  },
+  "bip44": {
+    "coinType": 118
+  },
+  "bech32Config": {
+    "bech32PrefixAccAddr": "bcna",
+    "bech32PrefixAccPub": "bcnapub",
+    "bech32PrefixValAddr": "bcnavaloper",
+    "bech32PrefixValPub": "bcnavaloperpub",
+    "bech32PrefixConsAddr": "bcnavalcons",
+    "bech32PrefixConsPub": "bcnavalconspub"
+  },
+  "currencies": [
+    {
+      "coinDenom": "BCNA",
+      "coinMinimalDenom": "ubcna",
+      "coinDecimals": 6,
+      "coinGeckoId": "bitcanna",
+      "coinImageUrl": "https://raw.githubusercontent.com/Zunia-Lab/zunia-chain-registry/main/images/bitcanna/chain.png"
+    }
+  ],
+  "feeCurrencies": [
+    {
+      "coinDenom": "BCNA",
+      "coinMinimalDenom": "ubcna",
+      "coinDecimals": 6,
+      "coinGeckoId": "bitcanna",
+      "gasPriceStep": {
+        "low": 0.001,
+        "average": 0.0025,
+        "high": 0.01
+      }
+    }
+  ],
+  "features": [],
+  "walletUrlForStaking": "https://wallet.bitcanna.network",
+  "explorers": {
+    "txPage": "https://explorer.whenmoonwhenlambo.money/bitcanna/tx/{txHash}"
+  }
+}

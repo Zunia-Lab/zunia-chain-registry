@@ -1,0 +1,51 @@
+{
+  "chainId": "gnodi",
+  "chainName": "Gnodi",
+  "chainSymbolImageUrl": "https://raw.githubusercontent.com/Zunia-Lab/zunia-chain-registry/main/images/gnodi/gnod.png",
+  "rpc": "https://rpc.gnodipowered.com",
+  "rest": "https://api.gnodipowered.com",
+  "nodeProvider": {
+    "name": "Gnodi Powered",
+    "email": "support@blockreign.tech",
+    "website": "https://gnodipowered.com/"
+  },
+  "bip44": {
+    "coinType": 118
+  },
+  "bech32Config": {
+    "bech32PrefixAccAddr": "gnodi",
+    "bech32PrefixAccPub": "gnodipub",
+    "bech32PrefixValAddr": "gnodivaloper",
+    "bech32PrefixValPub": "gnodivaloperpub",
+    "bech32PrefixConsAddr": "gnodivalcons",
+    "bech32PrefixConsPub": "gnodivalconspub"
+  },
+  "currencies": [
+    {
+      "coinDenom": "GNOD",
+      "coinMinimalDenom": "uGNOD",
+      "coinDecimals": 6,
+      "coinImageUrl": "https://raw.githubusercontent.com/Zunia-Lab/zunia-chain-registry/main/images/gnodi/gnod.png"
+    }
+  ],
+  "feeCurrencies": [
+    {
+      "coinDenom": "GNOD",
+      "coinMinimalDenom": "uGNOD",
+      "coinDecimals": 6,
+      "gasPriceStep": {
+        "low": 1,
+        "average": 1.5,
+        "high": 2
+      }
+    }
+  ],
+  "stakeCurrency": {
+    "coinDenom": "GNOD",
+    "coinMinimalDenom": "uGNOD",
+    "coinDecimals": 6
+  },
+  "explorers": {
+    "txPage": "https://gnodiscanner.com/txs/{txHash}"
+  }
+}
