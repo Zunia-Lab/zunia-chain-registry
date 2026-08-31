@@ -7,8 +7,8 @@ export default function ChainListPage() {
 
   return (
     <div>
-      <div id="keplr-not-installed" style={{ display: "none" }}>
-        keplr-not-installed
+      <div id="zunia-not-installed" style={{ display: "none" }}>
+        Install Zunia to add chains
       </div>
       <div id="registred-buttons" />
       <div id="chain-list" />

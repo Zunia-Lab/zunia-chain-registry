@@ -32,7 +32,7 @@ jobs:
       - run: yarn bundle:server
       - run: yarn bundle:zip
       - run: curl -fsSL https://get.pulumi.com | sh
-      - run: pulumi login s3://pulumi-keplr-chain-registry-backend
+      - run: pulumi login "${{ secrets.PULUMI_BACKEND_URL }}"
         working-directory: ./pulumi
         env:
           AWS_REGION: us-west-2

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { ChainInfo } from "@keplr-wallet/types";
-import { getKeplrFromWindow, KeplrWallet } from "../wallet";
+import { getWalletFromWindow, ZuniaWallet } from "../wallet";
 import { ChainItem } from "../components/chain-item";
 
 interface ChainsResponse {
@@ -13,7 +13,7 @@ export type DisplayChainInfo = ChainInfo & { displayType: DisplayType };
 
 export default function Home() {
   const [search, setSearch] = useState<string>("");
-  const [wallet, setWallet] = useState<KeplrWallet>();
+  const [wallet, setWallet] = useState<ZuniaWallet>();
   const [isExist, setIsExist] = useState<boolean>();
   const [chainInfos, setChainInfos] = useState<DisplayChainInfo[]>([]);
 
@@ -23,37 +23,33 @@ export default function Home() {
 
   const init = async () => {
     try {
-      const chainIds = await checkKeplr();
+      const chainIds = await checkWallet();
       await fetchChains(chainIds);
     } catch (e) {
       console.error(e);
     }
   };
 
-  const checkKeplr = async () => {
-    const keplr = await getKeplrFromWindow();
+  const checkWallet = async () => {
+    const provider = await getWalletFromWindow();
 
-    if (keplr === undefined) {
+    if (provider === undefined) {
       setIsExist(false);
       return;
-      // window.location.href =
-      //   "https://chrome.google.com/webstore/detail/keplr/dmkamcknogkgcdfhhbddcghachkejeap";
     }
 
-    if (keplr) {
-      setIsExist(true);
+    setIsExist(true);
 
-      const wallet = new KeplrWallet(keplr);
-      setWallet(wallet);
+    const wallet = new ZuniaWallet(provider);
+    setWallet(wallet);
 
-      const chainIds = (await wallet.getChainInfosWithoutEndpoints()).map(
-        (c) => c.chainId,
-      );
+    const chainIds = (await wallet.getChainInfosWithoutEndpoints()).map(
+      (c) => c.chainId,
+    );
 
-      await wallet.init(chainIds);
+    await wallet.init(chainIds);
 
-      return chainIds;
-    }
+    return chainIds;
   };
 
   const fetchChains = async (chainIds: string[] | undefined) => {
@@ -87,8 +83,14 @@ export default function Home() {
         onChange={(event) => {
           setSearch(event.target.value);
         }}
+        placeholder="Search chains"
       />
-      {!isExist ? <div>Install Keplr</div> : null}
+      {!isExist ? (
+        <div>
+          Install{" "}
+          <a href="https://github.com/Zunia-Lab/zunia-extension">Zunia</a>
+        </div>
+      ) : null}
       {chainInfos
         .filter(
           (chainInfo) =>

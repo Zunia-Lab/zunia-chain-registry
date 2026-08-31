@@ -5,9 +5,13 @@
 [![License](https://img.shields.io/github/license/Zunia-Lab/zunia-chain-registry)](LICENSE)
 [![Website](https://img.shields.io/badge/website-zuniawallet.com-2050C4)](https://zuniawallet.com)
 
+<p align="center">
+  <img src="docs/assets/zunia-icon.png" alt="Zunia" width="72" />
+</p>
+
 ## Overview
 
-This repository provides chain configuration JSON for Cosmos-SDK, EVM, and SVM chains used by Zunia. Entries are compatible with the standard suggest-chain format (`experimentalSuggestChain`).
+This repository holds chain configuration JSON for Cosmos-SDK, EVM, and SVM chains used by Zunia (browser extension and mobile). Entries follow the standard suggest-chain shape (`experimentalSuggestChain` / `window.zunia`).
 
 Chain metadata ships to Zunia clients from this registry, so new chains and endpoint updates can roll out without an app release.
 
@@ -20,15 +24,16 @@ https://raw.githubusercontent.com/Zunia-Lab/zunia-chain-registry/main/images/{ch
 
 ## Status
 
-Active fork of [chainapsis/keplr-chain-registry](https://github.com/chainapsis/keplr-chain-registry). See [UPSTREAM.md](./UPSTREAM.md) for sync instructions.
+In active use by Zunia Lab. Upstream sync from [chainapsis/keplr-chain-registry](https://github.com/chainapsis/keplr-chain-registry) is documented in [UPSTREAM.md](./UPSTREAM.md).
 
 ## Related repositories
 
 | Repository | Description |
 |------------|-------------|
-| [zunia-extension](https://github.com/Zunia-Lab/zunia-extension) | Browser extension |
+| [zunia-extension](https://github.com/Zunia-Lab/zunia-extension) | Browser extension (Chrome, Firefox, Edge, Safari) |
 | [zunia-mobile](https://github.com/Zunia-Lab/zunia-mobile) | Mobile wallet |
 | [zunia-docs](https://github.com/Zunia-Lab/zunia-docs) | Documentation |
+| [zunia-brand](https://github.com/Zunia-Lab/zunia-brand) | Brand assets |
 
 ## Quick start
 
@@ -39,102 +44,76 @@ yarn validate evm/{your-file}.json
 yarn validate svm/{your-file}.json
 ```
 
+> **Warning**  
+> Always run `yarn validate` on your local machine before opening a pull request. Read the feature requirements carefully for Cosmos, EVM, and SVM chains.
+
 ## Contributing
 
 1. Fork this repository and create a branch.
 2. Add or update chain JSON under `cosmos/`, `evm/`, or `svm/`.
-3. Add a 256x256 PNG logo under `images/{chain-identifier}/chain.png`.
-4. Run `yarn validate` on your file before opening a PR.
-5. Fill out the pull request template.
+3. Add a 256×256 PNG logo under `images/{chain-identifier}/chain.png`.
+4. Run `yarn validate` on your file.
+5. Open a PR using the template.
 
-See the detailed guidelines below and [CONTRIBUTING.md](./CONTRIBUTING.md).
+See [CONTRIBUTING.md](./CONTRIBUTING.md).
 
-## Security
+## Community-driven chains
 
-See [SECURITY.md](https://github.com/Zunia-Lab/.github/blob/main/SECURITY.md). Only add RPC and REST endpoints you trust.
-
-## License
-
-Apache-2.0. Upstream work by [Chainapsis](https://github.com/chainapsis) / Keplr team.
-
-## Attribution
-
-This project is a maintained fork of [keplr-chain-registry](https://github.com/chainapsis/keplr-chain-registry) by Chainapsis. We thank the Keplr team and contributors for the original protocol and validation tooling.
-
----
-> **Warning**
->
-> PLEASE RUN THE COMMANDS BELOW TO VERIFY CONFIGURATION IN YOUR LOCAL ENVIRONMENT BEFORE SUBMITTING PULL REQUESTS.
->
-> ```shell
-> # install node modules
-> yarn install
->
-> # validate your json file (for Cosmos-SDK-based chains, EVM chains, or SVM chains)
-> yarn validate cosmos/{your file.json}
-> yarn validate evm/{your file.json}
-> yarn validate svm/{your file.json}
-> ```
->
-> READ THE GUIDELINES BELLOW CAREFULLY, PAYING PARTICULAR ATTENTION TO THE "features" IN THE [[REQUIREMENT DETAILS for Cosmos-based chains](#cosmos-sdk-based-chain-registration-form-requirement-details)] and [[REQUIREMENT DETAILS for EVM-based chains](#evm-based-chain-registration-form-requirement-details)].
-
-# Guidelines for Community-Driven Non-Native Chain Integration
-
-Keplr team has always been at the leading edge of building secure and interoperable wallet infrastructure for the blooming cross-chain networks. While Keplr initially focused its core efforts on the Cosmos ecosystem (collectively known as the "interchain ecosystem"), it has since expanded to support EVM-compatible chains and Starknet, with plans to further extend into other ecosystems, leveraging thoughtfully designed UI/UX for enhanced compatibility across technologies.
-
-To help the builders easily plug into Keplr’s wide userbase and the ever-growing crypto ecosystems, Keplr has been offering an option of permissionless integration, the so-called “Suggest (Non-Native) Chain Integration”. The feature has enabled front-ends to request adding new blockchains that aren’t natively integrated into the Keplr extension.
-
-Keplr team is now introducing a Community-Driven Integration, which enables our users to easily make a request for adding new chains and updating their information. It's an expanded version of the previous suggest chain integration, providing a public API to our users for creating and updating a set integration standard for each chain.
-
-To make a pull request, please carefully read and follow the guidelines below. Any contribution is more than welcome!
-
-# Table of Contents
-
-- [Requirements and Preparation](#requirements-and-preparation)
-- [Cosmos-SDK-based Chains](#cosmos-sdk-based-chains)
-- [EVM-based Chains](#evm-based-chains)
-- [SVM-based Chains](#svm-based-chains)
-- [Notes](#note)
-
-# Requirements and Preparation
-
-This guildline outlines the basic information that is required for registering a chain to Keplr wallet. Please note that your request does not always guarantee integrations and updates; upon your submission, Keplr team will go through a minimal verification process to see if there is any security issue or any missing information.
-
-Once approved, the Keplr browser extension will show the tag “Community-Driven” on the chain connection page, to let the users be aware that the integration was requested and implemented by the community and the Keplr team has gone through the verification process.
+Once a pull request is approved, Zunia shows a **Community-Driven** tag on the chain connection screen so users know the integration was proposed by the community and reviewed by Zunia Lab.
 
 <p align="center">
-  <img src="https://i.imgur.com/I216R1M.png" alt="Sample Image" style="width: 350px;"/>
+  <img src="docs/assets/community-driven-tag.png" alt="Zunia Community-Driven chain tag" width="420" />
 </p>
 
-# Cosmos-SDK-based Chains
+---
 
-## Cosmos-SDK-based Chain Registration Directory Structure
+# Guidelines for community chain integration
 
-chainID is consisted of ({identifier}-{version}). **`chain-identifier`** therefore refers to a text identifier of a chain that comes before its version number. For example:
+Zunia is a multi-chain wallet for the Cosmos ecosystem (extension + mobile on the same keys), with growing support for EVM and SVM networks. Permissionless suggest-chain support lets front-ends and chain teams request chains that are not natively bundled.
+
+This registry is the community-driven path to add and update that metadata for all Zunia users.
+
+## Table of contents
+
+- [Requirements and preparation](#requirements-and-preparation)
+- [Cosmos-SDK-based chains](#cosmos-sdk-based-chains)
+- [EVM-based chains](#evm-based-chains)
+- [SVM-based chains](#svm-based-chains)
+- [Notes](#notes)
+
+## Requirements and preparation
+
+This guide lists the information required to register a chain for Zunia. Submission does not guarantee inclusion; Zunia Lab runs a minimal verification pass for security and completeness.
+
+Approved entries appear in Zunia with the Community-Driven tag (see screenshot above).
+
+# Cosmos-SDK-based chains
+
+## Directory structure
+
+`chainId` is `{identifier}-{version}`. **chain-identifier** is the text before the version. Examples:
 
 ```
-  The chain-identifier of `cosmoshub-4` is `cosmoshub`.
-  The chain-identifier of `crypto-org-chain-mainnet-1` is `crypto-org-chain-mainnet`.
-  The chain-identifier of `evmos_9001-2` is `evmos_9001`.
-  The chain-identifier of 'shentu-2.2' is 'shentu-2.2'.
+  cosmoshub-4                         → cosmoshub
+  crypto-org-chain-mainnet-1          → crypto-org-chain-mainnet
+  evmos_9001-2                        → evmos_9001
+  shentu-2.2                          → shentu-2.2
 ```
-
-Here’s an overview of the structure of the directory. Please provide the information and files complying with the requirements.
 
 ```
 .
-├── cosmos                       # Mainnet
-│     ├── cosmoshub.json         # Chains (Each file should be named `{chain-identifier}.json')
+├── cosmos                       # Mainnet / testnet JSON
+│     ├── cosmoshub.json         # Named `{chain-identifier}.json`
 │     ├── osmosis.json
 │     └── ...
-└── images                       # Collection of image assets
-      ├── cosmoshub              # Image assets of Comos Hub (Each directory should be named `{chain-identifier}`.)
-      │     └── chain.png        # Cosmos Hub Logo(png, 256x256px)
-      ├── osmosis                # Image assets of Osmosis
+└── images
+      ├── cosmoshub
+      │     └── chain.png        # 256×256 PNG
+      ├── osmosis
       └── ...
 ```
 
-### Cosmos-SDK-based Chain Registration Form
+### Registration form example
 
 ```json
 {
@@ -193,82 +172,57 @@ Here’s an overview of the structure of the directory. Please provide the infor
 }
 ```
 
-### Cosmos-SDK-based Chain Registration Form Requirement Details
+### Field requirements
 
-- chainId: chainId in a form of {identifier}-{version} (ex. cosmoshub-4)
-- chainName: the name of the chain that will be displayed on the wallet
-- chainSymbolImageUrl: Image URL of the chain.
-  - https://raw.githubusercontent.com/Zunia-Lab/zunia-chain-registry/main/images/{chain-identifier}/{file-name}.png
-  - Please modify the chain-identifier and file-name from the link above and upload it.
-- rpc: URL of RPC endpoint of the chain
-- rest: URL of REST/API endpoint of the chain
-- nodeProvider: provide the details of the RPC/REST node providers
-  - name: name of the node provider
-  - email: email address of the node provider (To help other users reach out when there is an issue with the nodes’ status)
-  - website(optional): website address of the node provider
-- walletUrlForStaking(optional): the URL where the users are directed when they click on Staking button of the Keplr Wallet
-- bip44: BIP-44 coin type (118 highly recommended)
-- bech32Config: prefix used at the beginning of the address
-- currencies: the list of the supported currencies. If your chain uses replicated security, please place your main native token at the top of the currencies list. Note that IBC tokens are not accepted here.
-- feeCurrencies: the list of the tokens that are accepted by the validators for fees
-- stakeCurrency: the staking token of the chain. Remove this item if your chain does not support native staking (e.g. your chain uses replicated security) or does not have a staking token.
-- coinGeckoId(optional): the active API ID for Keplr to get the price from CoinGecko. For a testnet chain, this field is not accepted.
-- features: any other features that are additionally supported by the chain
-  - cosmwasm: supports CosmWasm smart contracts
-  - secretwasm: supports WASM smart contracts of Secret Network
-  - eth-address-gen: supports EVM account generation
-  - eth-key-sign: supports EVM signatures
-  - eth-secp256k1-cosmos: Required for chains built with [github.com/cosmos/evm](https://github.com/cosmos/evm)
-  - axelar-evm-bridge: supports EVM bridge provided by Axelar Network
-  - osmosis-txfees: supports paying fees in other currencies on Osmosis
-- isTestnet: set it to true when your chain is a testnet or devnet
-- explorers(optional): block explorer configuration for transaction lookup
-  - txPage: URL template for transaction pages. Available placeholders:
-    - `{txHash}` - transaction hash in uppercase hex
-    - `{txHash:lowercase}` - transaction hash in lowercase hex
-    - `{txHash:uppercase}` - transaction hash in uppercase hex (same as `{txHash}`)
-    - Example: `"https://www.mintscan.io/osmosis/tx/{txHash}"`
+- **chainId:** `{identifier}-{version}` (e.g. `cosmoshub-4`)
+- **chainName:** Display name in Zunia
+- **chainSymbolImageUrl:** `https://raw.githubusercontent.com/Zunia-Lab/zunia-chain-registry/main/images/{chain-identifier}/{file}.png`
+- **rpc / rest:** HTTPS endpoints
+- **nodeProvider:** `name`, `email`, optional `website`
+- **walletUrlForStaking** (optional): URL opened from Zunia’s staking CTA
+- **bip44:** Coin type (`118` recommended for Cosmos)
+- **bech32Config:** Address prefixes
+- **currencies / feeCurrencies / stakeCurrency:** Native tokens only (no IBC tokens here)
+- **coinGeckoId** (optional): CoinGecko API id for prices in Zunia (not accepted for testnets)
+- **features:** `cosmwasm`, `secretwasm`, `eth-address-gen`, `eth-key-sign`, `eth-secp256k1-cosmos`, `axelar-evm-bridge`, `osmosis-txfees`, …
+- **isTestnet:** `true` for testnet/devnet
+- **explorers.txPage:** Template with `{txHash}`, `{txHash:lowercase}`, or `{txHash:uppercase}`
 
-# EVM-based Chains
+# EVM-based chains
 
-## EVM-based Chain Registration Directory Structure
+## Directory structure
 
-EVM-based chain identifier is consisted of eip155:{eip155-chain-id} which follows [CAIP-2](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-2.md)
+Identifier format: `eip155:{eip155-chain-id}` ([CAIP-2](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-2.md)).
 
 ```
-  The chain identifier of `Ethereum` is `eip155:1`.
-  The chain identifier of `Optimism` is `eip155:10`.
-  The chain identifier of `Polygon` is `eip155:137`.
+  Ethereum → eip155:1
+  Optimism → eip155:10
+  Polygon  → eip155:137
 ```
-
-Here’s an overview of the structure of the directory. Please provide the information and files complying with the requirements.
 
 ```
 .
 ├── evm
-│     ├── eip155:1.json                       # Chains (Each file should be named `{chain-identifier}.json')
-│     ├── eip155:10.json
+│     ├── eip155:1.json
 │     └── ...
-└── images                                    # Collection of image assets
-      ├── eip155:1                            # Image assets of Ethereum (Each directory should be named `{chain-identifier}`.)
-      │     ├── erc20
-      │     │     └── {contract address}.png  # Ethereum ERC20 token logo(png, 256x256px)
-      │     ├── chain.png                     # Ethereum logo(png, 256x256px)
-      │     └── ethereum-native.png           # Etherem native token logo(png, 256x256px)
-      ├── eip155.10
+└── images
+      ├── eip155:1
+      │     ├── chain.png
+      │     ├── ethereum-native.png
+      │     └── erc20/{contract}.png
       └── ...
 ```
 
-### EVM-based Chain Registration Form
+### Registration form example
 
 ```json
 {
-  "rpc": "https://evm-1.keplr.app",
-  "websocket": "wss://evm-1.keplr.app/websocket",
+  "rpc": "https://ethereum.publicnode.com",
+  "websocket": "wss://ethereum.publicnode.com",
   "nodeProvider": {
-    "name": "Keplr",
-    "email": "contact@keplr.app",
-    "website": "https://keplr.app"
+    "name": "PublicNode",
+    "email": "hello@zuniawallet.com",
+    "website": "https://zuniawallet.com"
   },
   "chainId": "eip155:1",
   "chainName": "Ethereum",
@@ -283,13 +237,6 @@ Here’s an overview of the structure of the directory. Please provide the infor
       "coinDecimals": 18,
       "coinGeckoId": "ethereum",
       "coinImageUrl": "https://raw.githubusercontent.com/Zunia-Lab/zunia-chain-registry/main/images/eip155:1/ethereum-native.png"
-    },
-    {
-      "coinDenom": "USDC",
-      "coinMinimalDenom": "erc20:0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48",
-      "coinDecimals": 6,
-      "coinGeckoId": "usd-coin",
-      "coinImageUrl": "https://raw.githubusercontent.com/Zunia-Lab/zunia-chain-registry/main/images/eip155:1/erc20/0xa0b86991c6218b36c1d19d4a2e9eb0ce3606eb48.png"
     }
   ],
   "feeCurrencies": [
@@ -308,60 +255,40 @@ Here’s an overview of the structure of the directory. Please provide the infor
 }
 ```
 
-### EVM-based Chain Registration Form Requirement Details
+### Field requirements
 
-- rpc: URL of RPC endpoint of the chain
-- websocket: URL of WebSocket endpoint of the chain
-- nodeProvider: provide the details of the RPC/WebSocket node providers
-  - name: name of the node provider
-  - email: email address of the node provider (To help other users reach out when there is an issue with the nodes’ status)
-  - website(optional): website address of the node provider
-- chainId: chain identifier in a form of eip155:{evm-chain-id} (ex. eip155:1)
-- chainName: the name of the chain that will be displayed on the wallet
-- chainSymbolImageUrl: Image URL of the chain.
-  - https://raw.githubusercontent.com/Zunia-Lab/zunia-chain-registry/main/images/{chain-identifier}/{file-name}.png
-  - Please modify the chain-identifier and file-name from the link above and upload it.
-- bip44: BIP-44 coin type (60 highly recommended)
-- currencies: the list of the supported currencies. If your chain uses replicated security, please place your main native token at the top of the currencies list.
-- feeCurrencies: the list of the tokens that are accepted for fees
-- coinGeckoId(optional): the active API ID for Keplr to get the price from CoinGecko. For a testnet chain, this field is not accepted.
-- features: any other features that are additionally supported by the chain
-  - op-stack-l1-data-fee: supports paying L1 data fee for OP stack based chain
-- explorers(optional): block explorer configuration for transaction lookup
-  - txPage: URL template for transaction pages. Available placeholders:
-    - `{txHash}` - transaction hash in uppercase hex
-    - `{txHash:lowercase}` - transaction hash in lowercase hex
-    - `{txHash:uppercase}` - transaction hash in uppercase hex (same as `{txHash}`)
-    - Example: `"https://etherscan.io/tx/0x{txHash}"`
-    - Example: `"https://lineascan.build/tx/0x{txHash:lowercase}"`
+- **rpc / websocket:** HTTPS / WSS endpoints
+- **nodeProvider:** Provider contact details
+- **chainId:** `eip155:{id}`
+- **bip44:** `60` recommended
+- **coinGeckoId** (optional): For prices in Zunia (not for testnets)
+- **features:** e.g. `op-stack-l1-data-fee`
+- **explorers.txPage:** Same placeholders as Cosmos
 
-# SVM-based Chains
+# SVM-based chains
 
-## SVM-based Chain Registration Directory Structure
+## Directory structure
 
-SVM-based chain identifier follows [CAIP-2](https://github.com/ChainAgnostic/CAIPs/blob/main/CAIPs/caip-2.md) format with {namespace}:{reference} structure, where reference is a base58 encoded hash.
+CAIP-2 `{namespace}:{reference}` (base58 reference for Solana).
 
 ```
-  The chain identifier of `Solana Mainnet` is `solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp`.
-  The chain identifier of `Solana Devnet` is `solana:EtWTRABZaYq6iMfeYKouRu166VU2xqa1`.
+  Solana Mainnet → solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp
+  Solana Devnet  → solana:EtWTRABZaYq6iMfeYKouRu166VU2xqa1
 ```
-
-Here's an overview of the structure of the directory. Please provide the information and files complying with the requirements.
 
 ```
 .
 ├── svm
-│     ├── solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp.json    # Chains (Each file should be named `{chain-identifier}.json')
-│     ├── solana:EtWTRABZaYq6iMfeYKouRu166VU2xqa1.json
+│     ├── solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp.json
 │     └── ...
-└── images                                                 # Collection of image assets
-      ├── solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp         # Image assets of Solana (Each directory should be named `{chain-identifier}`.)
-      │     ├── chain.png                                  # Solana logo(png, 256x256px)
-      │     └── sol.png                                    # Solana native token logo(png, 256x256px)
+└── images
+      ├── solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp
+      │     ├── chain.png
+      │     └── sol.png
       └── ...
 ```
 
-### SVM-based Chain Registration Form
+### Registration form example
 
 ```json
 {
@@ -396,39 +323,27 @@ Here's an overview of the structure of the directory. Please provide the informa
 }
 ```
 
-### SVM-based Chain Registration Form Requirement Details
+### Field requirements
 
-- rpc: URL of RPC endpoint of the chain
-- websocket: URL of WebSocket endpoint of the chain
-- chainId: chain identifier in a form of {namespace}:{base58-hash} (ex. solana:5eykt4UsFv8P8NJdTREpY1vzqKqZKvdp)
-- chainName: the name of the chain that will be displayed on the wallet
-- chainSymbolImageUrl: Image URL of the chain.
-  - https://raw.githubusercontent.com/Zunia-Lab/zunia-chain-registry/main/images/{chain-identifier}/{file-name}.png
-  - Please modify the chain-identifier and file-name from the link above and upload it.
-- bip44: BIP-44 coin type (501 for Solana)
-- currencies: the list of the supported currencies
-- feeCurrencies: the list of the tokens that are accepted for fees
-- coinGeckoId(optional): the active API ID for Keplr to get the price from CoinGecko. For a testnet chain, this field is not accepted.
-- isTestnet: set it to true when your chain is a testnet or devnet
-- explorers(optional): block explorer configuration for transaction lookup
-  - txPage: URL template for transaction pages. Available placeholders:
-    - `{txHash}` - transaction hash in uppercase hex
-    - `{txHash:lowercase}` - transaction hash in lowercase hex
-    - `{txHash:uppercase}` - transaction hash in uppercase hex (same as `{txHash}`)
-    - Example: `"https://explorer.solana.com/tx/{txHash}"`
+- **rpc / websocket**, **chainId**, **chainName**, **images**, **bip44** (`501` for Solana)
+- **coinGeckoId** (optional): For prices in Zunia (not for testnets)
+- **isTestnet**, **explorers.txPage** as above
 
-## NOTE:
+## Notes
 
-- Please check if the chain information file is in JSON format.
-- Chain logos should be in PNG format in 256x256px resolution. Please also note that the images will be automatically cropped into a circle to be displayed on the wallet (See the sample image above.)
-- If `coinImageUrl` is not provided in `currencies`, Keplr doesn't show the token image on the wallet.
-- RPC / WebSocket
-  - Please check if the RPC node is not currently experiencing any issues/errors.
-  - Please double-check if your chainId matches the RPC node’s chainId.
-  - Check if websocket connection is open.
-- REST
-  - Please check if the REST node is not currently experiencing any issues/errors.
-  - Please double-check if your chainId matches the REST node’s chainId.
-- Please provide the CoinGecko ID only if the price for the token is available on CoinGecko.
-- Since we typically double-check gas price updates for clarification, please include any relevant references in your request description.
-- If you'd like to add CW20 tokens, those are managed by [Keplr Contract Registry](https://github.com/chainapsis/keplr-contract-registry).
+- Chain JSON must be valid JSON.
+- Logos: PNG, 256×256. Zunia crops them to a circle in the UI.
+- If `coinImageUrl` is missing, Zunia may hide the token icon.
+- Confirm RPC / REST / WebSocket health and that `chainId` matches the node.
+- Prefer CoinGecko ids only when the token is listed.
+- Include references for gas price changes in the PR description.
+
+## Security
+
+See [SECURITY.md](./SECURITY.md). Only publish endpoints you trust.
+
+## License
+
+Apache-2.0.
+
+Schema and validation tooling originated in [chainapsis/keplr-chain-registry](https://github.com/chainapsis/keplr-chain-registry). This repository is maintained by [Zunia Lab](https://github.com/Zunia-Lab) for [zuniawallet.com](https://zuniawallet.com).

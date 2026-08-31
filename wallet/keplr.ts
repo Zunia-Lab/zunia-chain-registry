@@ -1,19 +1,35 @@
 import { ChainInfo, Keplr } from "@keplr-wallet/types";
 import { Wallet } from "./types";
 
-export const getKeplrFromWindow: () => Promise<
-  Keplr | undefined
+type WalletProvider = Keplr;
+
+function getProviderFromWindow(): WalletProvider | undefined {
+  if (typeof window === "undefined") {
+    return undefined;
+  }
+  // Prefer Zunia; fall back to compatible providers
+  const w = window as Window & {
+    zunia?: Keplr;
+    keplr?: Keplr;
+  };
+  return w.zunia ?? w.keplr;
+}
+
+/** Resolves the installed Zunia (or compatible) wallet provider. */
+export const getWalletFromWindow: () => Promise<
+  WalletProvider | undefined
 > = async () => {
   if (typeof window === "undefined") {
     return undefined;
   }
 
-  if (window.keplr) {
-    return window.keplr;
+  const existing = getProviderFromWindow();
+  if (existing) {
+    return existing;
   }
 
   if (document.readyState === "complete") {
-    return window.keplr;
+    return getProviderFromWindow();
   }
 
   return new Promise((resolve) => {
@@ -22,7 +38,7 @@ export const getKeplrFromWindow: () => Promise<
         event.target &&
         (event.target as Document).readyState === "complete"
       ) {
-        resolve(window.keplr);
+        resolve(getProviderFromWindow());
         document.removeEventListener("readystatechange", documentStateChange);
       }
     };
@@ -31,15 +47,18 @@ export const getKeplrFromWindow: () => Promise<
   });
 };
 
-export class KeplrWallet implements Wallet {
-  constructor(public readonly keplr: Keplr) {}
+/** @deprecated Use getWalletFromWindow */
+export const getKeplrFromWindow = getWalletFromWindow;
+
+export class ZuniaWallet implements Wallet {
+  constructor(public readonly provider: WalletProvider) {}
 
   getChainInfosWithoutEndpoints(): Promise<
     (Pick<ChainInfo, "chainId" | "chainName" | "bech32Config"> & {
       readonly isEthermintLike?: boolean;
     })[]
   > {
-    return this.keplr.getChainInfosWithoutEndpoints().then((chainInfos) => {
+    return this.provider.getChainInfosWithoutEndpoints().then((chainInfos) => {
       return chainInfos.map((chainInfo) => {
         return {
           ...chainInfo,
@@ -52,10 +71,13 @@ export class KeplrWallet implements Wallet {
   }
 
   suggestChain(chainInfo: ChainInfo): Promise<void> {
-    return this.keplr.experimentalSuggestChain(chainInfo);
+    return this.provider.experimentalSuggestChain(chainInfo);
   }
 
   init(chainIds: string[]): Promise<void> {
-    return this.keplr.enable(chainIds);
+    return this.provider.enable(chainIds);
   }
 }
+
+/** @deprecated Use ZuniaWallet */
+export class KeplrWallet extends ZuniaWallet {}

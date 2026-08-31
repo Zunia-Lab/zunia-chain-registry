@@ -1,9 +1,5 @@
 function parse(chainId) {
-  // In the case of injective dev/testnet, there is a difficult problem to deal with keplr's chain identifier system...
-  // Fundamentally, keplr's chain identifier system started when the app was created, so too mnay logic depends on chain identifier.
-  // Temporarily deal with it in the way below.
-  // There is a possibility of some kind of problem...
-  // But anyway, it's not a big problem because it's dev/testnet...
+  // Special-case injective testnets for chain-identifier parsing.
   if (chainId === "injective-777" || chainId === "injective-888") {
     return {
       identifier: chainId,
@@ -23,19 +19,21 @@ function parse(chainId) {
   }
 }
 
-const getKeplrFromWindow = async () => {
-  if (window.keplr) {
-    return window.keplr;
+const getWalletFromWindow = async () => {
+  const provider = () => window.zunia || window.keplr;
+
+  if (provider()) {
+    return provider();
   }
 
   if (document.readyState === "complete") {
-    return window.keplr;
+    return provider();
   }
 
   return new Promise((resolve) => {
     const documentStateChange = (event) => {
       if (event.target && event.target.readyState === "complete") {
-        resolve(window.keplr);
+        resolve(provider());
         document.removeEventListener("readystatechange", documentStateChange);
       }
     };
@@ -45,29 +43,29 @@ const getKeplrFromWindow = async () => {
 };
 
 async function init() {
-  const keplr = await getKeplrFromWindow();
+  const wallet = await getWalletFromWindow();
 
-  const keplrNotInstalledDiv = document.getElementById("keplr-not-installed");
-  keplrNotInstalledDiv.style.display = "none";
+  const notInstalledDiv = document.getElementById("zunia-not-installed");
+  if (notInstalledDiv) {
+    notInstalledDiv.style.display = "none";
+  }
 
   const loadingDiv = document.getElementById("loading");
   loadingDiv.style.display = "flex";
 
-  const response = await fetch(
-    "https://keplr-chain-registry.vercel.app/api/chains",
-  );
+  const response = await fetch("/api/chains");
   const _chainInfos = await response.json();
   const chainInfos = _chainInfos.chains.filter((chainInfo) => {
     return !chainInfo.hideInUI;
   });
 
-  const isOnKeplrMobile = /KeplrWalletMobile|Android|iPhone/g.test(
+  const isOnMobile = /ZuniaWalletMobile|Android|iPhone/g.test(
     navigator.userAgent,
   );
 
   let registeredChainIds = [];
-  if (keplr) {
-    const registeredResponse = await keplr.getChainInfosWithoutEndpoints();
+  if (wallet) {
+    const registeredResponse = await wallet.getChainInfosWithoutEndpoints();
     registeredChainIds = registeredResponse.map(
       (chainInfo) => parse(chainInfo.chainId).identifier,
     );
@@ -85,7 +83,7 @@ async function init() {
         !registeredChainIds.includes(parse(chainInfo.chainId).identifier),
     )
     .filter((chainInfo) => {
-      if (isOnKeplrMobile) {
+      if (isOnMobile) {
         return !chainInfo.chainId.startsWith("eip155:");
       } else {
         return true;
@@ -98,7 +96,7 @@ async function init() {
       registeredChainIds.includes(parse(chainInfo.chainId).identifier),
     )
     .filter((chainInfo) => {
-      if (isOnKeplrMobile) {
+      if (isOnMobile) {
         return !chainInfo.chainId.startsWith("eip155:");
       } else {
         return true;
@@ -107,11 +105,11 @@ async function init() {
 
   if (filteredChainInfos.length > 0) {
     filteredChainInfos.map((chainInfo) => {
-      return createChainItem(chainInfo, keplr);
+      return createChainItem(chainInfo, wallet);
     });
 
     registeredChainInfos.map((chainInfo) => {
-      return createChainItem(chainInfo, keplr, true);
+      return createChainItem(chainInfo, wallet, true);
     });
   } else {
     const addedAllChainDiv = document.createElement("div");
@@ -135,7 +133,7 @@ function removeChainListChild() {
   }
 }
 
-function createChainItem(chainInfo, keplr, registered) {
+function createChainItem(chainInfo, wallet, registered) {
   const chainItemDiv = document.createElement("div");
   chainItemDiv.className = "chain-item";
 
@@ -146,7 +144,7 @@ function createChainItem(chainInfo, keplr, registered) {
   if (registered) {
     createRegisteredButton(chainItemDiv);
   } else {
-    createRegisterButton(chainItemDiv, chainInfo, keplr);
+    createRegisterButton(chainItemDiv, chainInfo, wallet);
   }
 
   const chainListDiv = document.getElementById("chain-list");
@@ -211,16 +209,16 @@ function createNodeProvider(chainItemDiv, chainInfo) {
       isEmail
         ? chainInfo.nodeProvider.email
         : isDiscord
-        ? chainInfo.nodeProvider.discord
-        : "",
+          ? chainInfo.nodeProvider.discord
+          : "",
     );
     providerContactDiv.appendChild(providerContactText);
     providerContactDiv.onclick = function () {
       window.location = isEmail
         ? `mailto:${chainInfo.nodeProvider.email}`
         : isDiscord
-        ? chainInfo.nodeProvider.discord
-        : "";
+          ? chainInfo.nodeProvider.discord
+          : "";
     };
 
     nodeProviderDiv.appendChild(providerLinkA);
@@ -231,43 +229,44 @@ function createNodeProvider(chainItemDiv, chainInfo) {
     const nodeProviderDiv = document.createElement("div");
     nodeProviderDiv.className = "native-node-provider";
 
-    const providerNameText = document.createTextNode("Keplr Node");
+    const providerNameText = document.createTextNode("Zunia Node");
     nodeProviderDiv.appendChild(providerNameText);
 
     chainItemDiv.appendChild(nodeProviderDiv);
   }
 }
 
-function createRegisterButton(chainItemDiv, chainInfo, keplr) {
+function createRegisterButton(chainItemDiv, chainInfo, wallet) {
   const registerButton = document.createElement("button");
   registerButton.className = "chain-register";
 
-  const registerButtonText = document.createTextNode("Add to Keplr");
+  const registerButtonText = document.createTextNode("Add to Zunia");
   registerButton.appendChild(registerButtonText);
 
   registerButton.onclick = async () => {
     try {
-      if (keplr) {
+      const provider = wallet || window.zunia || window.keplr;
+      if (provider) {
         registerButton.classList.add("button-loading");
         registerButton.textContent = "Loading";
 
-        await window.keplr.experimentalSuggestChain(chainInfo);
+        await provider.experimentalSuggestChain(chainInfo);
 
         setTimeout(() => {
           registerButton.classList.remove("button-loading");
-          registerButton.textContent = "Add to Keplr";
+          registerButton.textContent = "Add to Zunia";
           init();
         }, 1000);
       } else {
-        const keplrNotInstalledDiv = document.getElementById(
-          "keplr-not-installed",
-        );
-        keplrNotInstalledDiv.style.display = "flex";
+        const notInstalledDiv = document.getElementById("zunia-not-installed");
+        if (notInstalledDiv) {
+          notInstalledDiv.style.display = "flex";
+        }
       }
     } catch (e) {
       setTimeout(() => {
         registerButton.classList.remove("button-loading");
-        registerButton.textContent = "Add to Keplr";
+        registerButton.textContent = "Add to Zunia";
       }, 300);
 
       console.error(e);

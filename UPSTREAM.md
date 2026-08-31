@@ -1,6 +1,6 @@
 # Upstream sync
 
-This repository is forked from [chainapsis/keplr-chain-registry](https://github.com/chainapsis/keplr-chain-registry).
+This repository is maintained by Zunia Lab. Optional sync from [chainapsis/keplr-chain-registry](https://github.com/chainapsis/keplr-chain-registry) keeps schemas and community chain data current.
 
 ## Remotes
 
@@ -11,30 +11,29 @@ git fetch upstream
 
 ## Sync workflow
 
-Periodically merge upstream changes:
-
 ```bash
 git checkout main
 git fetch upstream
 git merge upstream/main
-# Resolve conflicts, keeping zunialab image URLs where we have forked assets
-yarn validate cosmos/your-chain.json  # spot-check after merge
+# Resolve conflicts; keep Zunia branding, docs/assets, and Zunia-Lab image URLs
+yarn validate cosmos/your-chain.json
 git push origin main
 ```
 
 ## URL migration after upstream merge
 
-If upstream adds entries still pointing at `chainapsis/keplr-chain-registry`, update image URLs:
+If upstream reintroduces old image hosts:
 
 ```bash
-find . -type f \( -name "*.json" \) -exec sed -i '' \
+find . -type f -name "*.json" -exec sed -i '' \
   's|chainapsis/keplr-chain-registry|Zunia-Lab/zunia-chain-registry|g' {} +
 ```
 
-## What we change vs upstream
+## What Zunia changes vs upstream
 
-- README and documentation for Zunia wallet consumers
-- `chainSymbolImageUrl` and related raw GitHub URLs point to this repository
-- Zunia-specific chain curation and review process
+- README, docs, and UI copy branded for Zunia
+- `chainSymbolImageUrl` and related raw URLs point at this repository
+- Screenshots and icons under `docs/assets/`
+- Curation and review process owned by Zunia Lab
 
-We do not remove Keplr or Chainapsis attribution.
+Attribution for the original protocol remains in the README license section.
