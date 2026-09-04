@@ -62,7 +62,7 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md).
 Once a pull request is approved, Zunia shows a **Community-Driven** tag on the chain connection screen so users know the integration was proposed by the community and reviewed by Zunia Lab.
 
 <p align="center">
-  <img src="docs/assets/community-driven-tag.png" alt="Zunia Community-Driven chain tag" width="420" />
+  <img src="docs/assets/community-driven-tag.svg" alt="Zunia Community-Driven chain tag" width="420" />
 </p>
 
 ---
