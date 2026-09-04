@@ -15,10 +15,10 @@
   "bech32Config": {
     "bech32PrefixAccAddr": "lumi",
     "bech32PrefixAccPub": "lumipub",
-    "bech32PrefixValAddr": "lumiValoper",
-    "bech32PrefixValPub": "lumiValoperpub",
-    "bech32PrefixConsAddr": "lumiValcons",
-    "bech32PrefixConsPub": "lumiValconspub"
+    "bech32PrefixValAddr": "lumivaloper",
+    "bech32PrefixValPub": "lumivaloperpub",
+    "bech32PrefixConsAddr": "lumivalcons",
+    "bech32PrefixConsPub": "lumivalconspub"
   },
   "currencies": [
     {

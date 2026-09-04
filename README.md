@@ -3,10 +3,10 @@
 > Community-maintained chain metadata for the [Zunia wallet](https://zuniawallet.com).
 
 [![License](https://img.shields.io/github/license/Zunia-Lab/zunia-chain-registry)](LICENSE)
-[![Website](https://img.shields.io/badge/website-zuniawallet.com-2050C4)](https://zuniawallet.com)
+[![Website](https://img.shields.io/badge/website-zuniawallet.com-FF1B0C)](https://zuniawallet.com)
 
 <p align="center">
-  <img src="docs/assets/zunia-icon.png" alt="Zunia" width="72" />
+  <img src="https://raw.githubusercontent.com/Zunia-Lab/zunia-brand/main/png/icons/app/zunia-icon-256.png" alt="Zunia" width="72" />
 </p>
 
 ## Overview
