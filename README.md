@@ -1,9 +1,9 @@
 # Zunia Chain Registry
 
-> Community-maintained chain metadata for the [Zunia wallet](https://zuniawallet.com).
+> Community-maintained chain metadata for the [Zunia wallet](https://zunialab.com).
 
 [![License](https://img.shields.io/github/license/Zunia-Lab/zunia-chain-registry)](LICENSE)
-[![Website](https://img.shields.io/badge/website-zuniawallet.com-FF1B0C)](https://zuniawallet.com)
+[![Website](https://img.shields.io/badge/website-zunialab.com-FF1B0C)](https://zunialab.com)
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/Zunia-Lab/zunia-brand/main/png/icons/app/zunia-icon-256.png" alt="Zunia" width="72" />
@@ -221,8 +221,8 @@ Identifier format: `eip155:{eip155-chain-id}` ([CAIP-2](https://github.com/Chain
   "websocket": "wss://ethereum.publicnode.com",
   "nodeProvider": {
     "name": "PublicNode",
-    "email": "hello@zuniawallet.com",
-    "website": "https://zuniawallet.com"
+    "email": "hello@zunialab.com",
+    "website": "https://zunialab.com"
   },
   "chainId": "eip155:1",
   "chainName": "Ethereum",
@@ -346,4 +346,4 @@ See [SECURITY.md](./SECURITY.md). Only publish endpoints you trust.
 
 Apache-2.0.
 
-Schema and validation tooling originated in [chainapsis/keplr-chain-registry](https://github.com/chainapsis/keplr-chain-registry). This repository is maintained by [Zunia Lab](https://github.com/Zunia-Lab) for [zuniawallet.com](https://zuniawallet.com).
+Schema and validation tooling originated in [chainapsis/keplr-chain-registry](https://github.com/chainapsis/keplr-chain-registry). This repository is maintained by [Zunia Lab](https://github.com/Zunia-Lab) for [zunialab.com](https://zunialab.com).
