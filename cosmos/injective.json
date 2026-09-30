@@ -266,6 +266,7 @@
       }
     }
   ],
+  "ethPubKeyTypeUrl": "/injective.crypto.v1beta1.ethsecp256k1.PubKey",
   "features": [
     "eth-address-gen",
     "eth-key-sign",
