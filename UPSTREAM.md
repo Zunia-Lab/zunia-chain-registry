@@ -35,5 +35,7 @@ find . -type f -name "*.json" -exec sed -i '' \
 - `chainSymbolImageUrl` and related raw URLs point at this repository
 - Screenshots and icons under `docs/assets/`
 - Curation and review process owned by Zunia Lab
+- Injective's `ethPubKeyTypeUrl` (`/injective.crypto.v1beta1.ethsecp256k1.PubKey`), which the validator does not know yet
+- USDC keeps its bare `coinDenom` on Noble (`uusdc`) and Injective (`erc20:0xa00C…`), where upstream writes `USDC.n` and `USDC.inj`: the Zunia apps tag a ticker issued on several chains with its issuer themselves (`USDC.n`, `USDC.inj`, `USDC.grv`), and they recognise a shared ticker by the bare name. Keep these when merging upstream.
 
 Attribution for the original protocol remains in the README license section.
