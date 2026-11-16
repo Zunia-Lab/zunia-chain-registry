@@ -51,7 +51,7 @@
       "coinImageUrl": "https://raw.githubusercontent.com/Zunia-Lab/zunia-chain-registry/main/images/injective/erc20/0x83a15000b753ac0eeee06d2cb41a69e76d0d5c7f7.png"
     },
     {
-      "coinDenom": "USDC",
+      "coinDenom": "USDC.inj",
       "coinMinimalDenom": "erc20:0xa00c59ff5a080d2b954d0c75e46e22a0c371235a",
       "coinDecimals": 6,
       "coinGeckoId": "usd-coin",
@@ -250,6 +250,25 @@
       "coinMinimalDenom": "factory/inj13j2rpnlwl30c02d4pzukykwfeyyhelvry9cqte/shroom_11_273ee1ea53abbcad",
       "coinDecimals": 18,
       "coinImageUrl": "https://raw.githubusercontent.com/Zunia-Lab/zunia-chain-registry/main/images/injective/factory/inj13j2rpnlwl30c02d4pzukykwfeyyhelvry9cqte/berb.png"
+    },
+    {
+      "coinDenom": "MOTION",
+      "coinMinimalDenom": "factory/inj13j2rpnlwl30c02d4pzukykwfeyyhelvry9cqte/shroom_0_3b4d31d5571b97db",
+      "coinDecimals": 18,
+      "coinGeckoId": "motion-6",
+      "coinImageUrl": "https://raw.githubusercontent.com/Zunia-Lab/zunia-chain-registry/main/images/injective/factory/inj13j2rpnlwl30c02d4pzukykwfeyyhelvry9cqte/motion.png"
+    },
+    {
+      "coinDenom": "ZZTOP",
+      "coinMinimalDenom": "factory/inj13j2rpnlwl30c02d4pzukykwfeyyhelvry9cqte/shroom_157_99c09d972f9c1f79",
+      "coinDecimals": 18,
+      "coinImageUrl": "https://raw.githubusercontent.com/Zunia-Lab/zunia-chain-registry/main/images/injective/factory/inj13j2rpnlwl30c02d4pzukykwfeyyhelvry9cqte/zztop.png"
+    },
+    {
+      "coinDenom": "SPROUT",
+      "coinMinimalDenom": "erc20:0x503f2a7bac1e2ff2800aa92edb82abef0bfa631e",
+      "coinDecimals": 18,
+      "coinImageUrl": "https://raw.githubusercontent.com/Zunia-Lab/zunia-chain-registry/main/images/injective/erc20/0x503f2a7bac1e2ff2800aa92edb82abef0bfa631e.png"
     }
   ],
   "feeCurrencies": [
