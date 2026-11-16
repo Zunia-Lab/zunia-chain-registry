@@ -40,19 +40,20 @@
       "coinGeckoId": "xpla",
       "coinImageUrl": "https://raw.githubusercontent.com/Zunia-Lab/zunia-chain-registry/main/images/dimension_37/axpla.png",
       "gasPriceStep": {
-        "low": 280000000000,
-        "average": 280000000000,
-        "high": 280000000000
+        "low": 10000000000000,
+        "average": 10000000000000,
+        "high": 10000000000000
       }
     }
   ],
   "evm": {
     "chainId": 37,
-    "rpc": "https://dimension-evm-rpc.xpla.dev"
+    "rpc": "https://dimension-evm-rpc.zenaad.com"
   },
   "features": [
     "eth-address-gen",
     "eth-key-sign",
+    "eth-secp256k1-cosmos",
     "cosmwasm"
   ],
   "explorers": {

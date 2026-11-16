@@ -1,7 +1,7 @@
 {
   "rpc": "https://rpc-iris.keplr.app",
   "rest": "https://lcd-iris.keplr.app",
-  "chainId": "irishub-1",
+  "chainId": "irishub-2",
   "chainName": "IRISnet",
   "chainSymbolImageUrl": "https://raw.githubusercontent.com/Zunia-Lab/zunia-chain-registry/main/images/irishub/chain.png",
   "stakeCurrency": {
@@ -12,7 +12,7 @@
     "coinImageUrl": "https://raw.githubusercontent.com/Zunia-Lab/zunia-chain-registry/main/images/irishub/uiris.png"
   },
   "walletUrl": "https://wallet.keplr.app/chains/irisnet",
-  "walletUrlForStaking": "https://wallet.keplr.app/chains/irisnet?modal=staking&chain=irishub-1&step_id=2",
+  "walletUrlForStaking": "https://wallet.keplr.app/chains/irisnet?modal=staking&chain=irishub-2&step_id=2",
   "bip44": {
     "coinType": 118
   },
