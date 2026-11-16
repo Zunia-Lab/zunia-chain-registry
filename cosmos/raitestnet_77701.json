@@ -2,8 +2,8 @@
   "chainId": "raitestnet_77701-1",
   "chainName": "Republic AI Testnet",
   "chainSymbolImageUrl": "https://raw.githubusercontent.com/Zunia-Lab/zunia-chain-registry/main/images/raitestnet_77701/chain.png",
-  "rpc": "https://rpc.republicai.io",
-  "rest": "https://rest.republicai.io",
+  "rpc": "https://rpc-t.republic.vinjan-inc.com",
+  "rest": "https://api-t.republic.vinjan-inc.com",
   "nodeProvider": {
     "name": "Republic AI",
     "email": "nkxmail@proton.me",
